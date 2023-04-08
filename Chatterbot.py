@@ -1,5 +1,5 @@
 from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
+from chatterbot.trainers import ChatterBotCorpusTrainer,ListTrainer
 
 bot = ChatBot("Rex")
 
@@ -9,8 +9,15 @@ trainer = ChatterBotCorpusTrainer(bot)
 # 语料库
 trainer.train("chatterbot.corpus.chinese", "chatterbot.corpus.english")
 
+trainer = ListTrainer(bot)
 
-# 开始对话
+trainer.train([
+    "你是?",
+    "Hello",
+    "你是谁?",
+    "AI",
+])
+
 print("开始对话")
 while True:
     try:
