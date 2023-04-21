@@ -1,9 +1,15 @@
 from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer,ListTrainer
+from chatterbot.trainers import ChatterBotCorpusTrainer, ListTrainer
 
-bot = ChatBot("Rex")
+bot = ChatBot("Rex",
+              logic_adapters=[
+                  {
+                      'import_path': 'customAdapter.CustomAdapter'
+                  }
+              ]
+)
 
-# Create a new trainer for the chatbot
+# 创建新的训练器
 trainer = ChatterBotCorpusTrainer(bot)
 
 # 语料库
@@ -12,10 +18,15 @@ trainer.train("chatterbot.corpus.chinese", "chatterbot.corpus.english")
 trainer = ListTrainer(bot)
 
 trainer.train([
-    "你是?",
-    "Hello",
-    "你是谁?",
-    "AI",
+    "你是",
+    "Rex",
+    "你是谁",
+    "REX大哥",
+])
+
+trainer.train([
+    "吃饭了吗",
+    "没有",
 ])
 
 print("开始对话")
